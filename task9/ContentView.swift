@@ -33,7 +33,7 @@ struct ContentView: View {
                   let secondCircle = context.resolveSymbol(id: ResolveType.onBackGround.rawValue) else {
                 return
             }
-            context.addFilter(.alphaThreshold(min: 0.2, color: .green))
+            context.addFilter(.alphaThreshold(min: 0.2, max: 0.6, color: .green))
             context.addFilter(.blur(radius: firstCircle.size.width / 2))
             context.drawLayer { contextSecond in
                 contextSecond.draw(firstCircle, at: .init(x: centerWidth, y: centerHeight))
