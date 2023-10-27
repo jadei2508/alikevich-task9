@@ -43,7 +43,7 @@ struct ContentView: View {
             cicle.offset(x: position.width, y: position.height).tag(ResolveType.onForeground.rawValue)
             cicle.tag(ResolveType.onBackGround.rawValue)
         }.background()
-            .modifier(DraggableView(position: $position))
+            .draggable(position: $position)
             .animation(.interactiveSpring(dampingFraction: 0.4, blendDuration: 1), value: self.position)
     }
 }
