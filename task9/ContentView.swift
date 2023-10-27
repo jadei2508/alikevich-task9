@@ -24,16 +24,16 @@ struct ContentView: View {
     private var cicle: some View = Circle()
                                 .frame(width: UIScreen.main.bounds.width / 5)
                                 .aspectRatio(1, contentMode: .fit)
-                                .background(Color.green)
     
     @State private var position: CGSize = .zero
     
     var body: some View {
         Canvas { context, size in
-            let firstCircle = context.resolveSymbol(id: ResolveType.onForeground.rawValue)!
-            let secondCircle = context.resolveSymbol(id: ResolveType.onBackGround.rawValue)!
-            
-            context.addFilter(.alphaThreshold(min: 0.2))
+            guard let firstCircle = context.resolveSymbol(id: ResolveType.onForeground.rawValue),
+                  let secondCircle = context.resolveSymbol(id: ResolveType.onBackGround.rawValue) else {
+                return
+            }
+            context.addFilter(.alphaThreshold(min: 0.2, color: .green))
             context.addFilter(.blur(radius: firstCircle.size.width / 2))
             context.drawLayer { contextSecond in
                 contextSecond.draw(firstCircle, at: .init(x: centerWidth, y: centerHeight))
